@@ -1,0 +1,26 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 20px;
+}
+label{
+   position: absolute;
+  
+}
+
+.login{
+    display: flex;
+    flex-direction: row;
+}
+
+button{
+    padding: 10px;
+    margin-bottom: 10px;
+}
