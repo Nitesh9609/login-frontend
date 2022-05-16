@@ -18,7 +18,7 @@ const SignUp = () => {
     }
 
     const handleOnClick= async ()  =>{
-        axios.post('http://localhost:8080/app/user/register',user)
+        axios.post('https://login-backend.vercel.app/app/user/register',user)
         .then( (response) => {
             console.log(response.data);
             if(response.data){
