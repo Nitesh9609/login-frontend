@@ -1,28 +1,47 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import './SignUp.css'
+import TextField from "@mui/material/TextField";
+import Button from '@mui/material/Button';
+import { useNavigate} from 'react-router-dom';
+
 const SignUp = () => {
   
-    
+    const navigate = useNavigate()
+   
     const [user,setUser] = useState({})
 
     const handleOnChange = (event) =>{
         const {name,value} = event.target
         setUser({...user,[name]:value})
-        // console.log(user)
+       
     }
 
-    const handleOnClick= () =>{
+    const handleOnClick= async ()  =>{
         axios.post('http://localhost:8080/app/user/register',user)
-        .then(function (response) {
-            console.log(response);
-        })
+        .then( (response) => {
+            console.log(response.data);
+            if(response.data){
+                return alert('User Created Successfully')
+            }
+            else{
+                return alert('some error')
+            }
+        }
+        
+        )
         .catch(function (error) {
             console.log(error);
         });
 
-        // setUser(user)
-        // console.log(user)
+
+        // const result = await axios.post('http://localhost:8080/app/user/register',user)
+        // if(result){
+        //     alert("SignUp Sucessfull")
+        // }
+        // localStorage.setItem("user", JSON.stringify(result.data))
+    
+
     }
 
 
@@ -33,54 +52,60 @@ const SignUp = () => {
             <h1>SignUp Form</h1>
 
             <div className='signup'>
-                    <input 
-                        name='name' 
-                        type='text' 
-                        placeholder='Enter your Name'
-                        onChange={handleOnChange}
-                    />
+            <TextField 
+                        required
+                        name="name"
+                        type="text" 
+                        label="Name" 
+                        variant="outlined" 
+                        onChange={handleOnChange} />
             </div>
             
             <div className='signup'>
-                <input 
-                    name='email' 
-                    type='text' 
-                    placeholder='Enter your Email'
-                    onChange={handleOnChange}
-                />
+            <TextField 
+                        required
+                        name="email"
+                        type="email" 
+                        label="Email" 
+                        variant="outlined" 
+                        onChange={handleOnChange} />
             </div>
             
             <div className='signup'>
-                <input 
-                    name='address' 
-                    type='text' 
-                    placeholder='Enter your Address'
-                    onChange={handleOnChange}
-                />
+            <TextField 
+                        required
+                        name="address"
+                        type="text" 
+                        label="Address" 
+                        variant="outlined" 
+                        onChange={handleOnChange} />
             </div>
             
             
             <div className='signup'>
-                <input 
-                    name='password'
-                    type='password'
-                    placeholder='Enter your Password'
-                    onChange={handleOnChange}
-                />
+            <TextField 
+                            required
+                            name="password" 
+                            type="password"
+                            label="Password" 
+                            variant="outlined" 
+                            onChange={handleOnChange} />
             </div>
             
 
             <div className='signup'>
-                <input 
-                    name='confirmPassword'
-                    type='password'
-                    placeholder='Confirm Password'
-                    onChange={handleOnChange}
-                />
+            <TextField 
+                            required
+                            name="confirmPassword" 
+                            type="password"
+                            label="Confirm Password" 
+                            variant="outlined" 
+                            onChange={handleOnChange} />
 
             </div>
-           
-            <button onClick={handleOnClick} >Sign Up</button>
+            
+            <Button onClick={handleOnClick} variant="contained">SIGN UP</Button>
+            
         </div>
     </>
   )
